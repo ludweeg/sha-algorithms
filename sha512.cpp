@@ -67,8 +67,8 @@ std::string hashComputation512(std::string pmess)
   }
 
   std::stringstream ss;
-  ss << std::setw(16) << std::setfill('0') << std::hex
-    << H[0] << H[1] << H[2] << H[3] << H[4] << H[5] << H[6] << H[7];
+  for(size_t i = 0; i < 8; ++i)
+    ss << std::setw(8) << std::setfill('0') << std::hex << H[i];
 
   return ss.str();
 }

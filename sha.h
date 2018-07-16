@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iomanip>
 #include <functional>
+#include <iostream>
 
 typedef unsigned int int32;
 typedef unsigned long long int64;
