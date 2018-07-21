@@ -13,7 +13,7 @@ typedef unsigned long long int64;
 #define ROTR_32(x,n)  ((x >> n) | (x << (32 - n)))
 #define ROTR_64(x,n)  ((x >> n) | (x << (64 - n)))
 #define ROTL_32(x,n)  ((x << n) | (x >> (32 - n)))
-#define SHR(x,n)   (x >> n)
+#define SHR(x,n)      (x >> n)
 #define S0_256(x) (ROTR_32(x, 2) ^ ROTR_32(x,13) ^ ROTR_32(x,22))
 #define S0_512(x) (ROTR_64(x,28) ^ ROTR_64(x,34) ^ ROTR_64(x,39))
 #define S1_256(x) (ROTR_32(x, 6) ^ ROTR_32(x,11) ^ ROTR_32(x,25))
