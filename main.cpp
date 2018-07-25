@@ -1,6 +1,6 @@
 
-#include <iostream>
 #include "sha.h"
+#include <iostream>
 
 int main()
 {
