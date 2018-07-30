@@ -17,5 +17,5 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(EXECUTABLE)
+	shred -u -n 35 $(OBJECTS) $(EXECUTABLE)
 
