@@ -5,10 +5,10 @@ std::string preprocessing384(std::string mess)
   std::stringstream ss;
 
   // l + 1 + k ≡ 896 mod 1024 (1 -> 1000 0000(bin) = 80(hex) -> 8 bit)
-  int64 l = 8 * mess.length();
-  int64 k = (896 - (8 + l)) % 1024;
+  int64 l {(int32)(8 * mess.length())};
+  int64 k {(896 - (8 + l)) % 1024};
 
-  for(size_t i = 0; i < mess.length(); ++i)
+  for(size_t i {}; i < mess.length(); ++i)
     ss << std::setw(2) << std::setfill('0') << std::hex << (int64)mess[i];
   ss << "80" << std::setw(32 + k / 4) << std::setfill('0') << std::hex << l;
 
@@ -18,11 +18,11 @@ std::string preprocessing384(std::string mess)
 std::string hashComputation384(std::string pmess)
 {
   int64 a,b,c,d,e,f,g,h,t1,t2;
-  int64 w[80],H[8] = {
+  int64 w[80],H[8] {
     0xcbbb9d5dc1059ed8, 0x629a292a367cd507, 0x9159015a3070dd17, 0x152fecd8f70e5939,
     0x67332667ffc00b31, 0x8eb44a8768581511, 0xdb0c2e0d64f98fa7, 0x47b5481dbefa4fa4};
 
-  for(size_t i = 0, j = 0; i < pmess.length(); i += 16, ++j)
+  for(size_t i {}, j {}; i < pmess.length(); i += 16, ++j)
   {
     w[j] = std::stoll(pmess.substr(i,16), 0, 16);
 
@@ -41,7 +41,7 @@ std::string hashComputation384(std::string pmess)
       g = H[6];
       h = H[7];
 
-      for(size_t t = 0; t < 80; ++t)
+      for(size_t t {}; t < 80; ++t)
       {
         t1 = h + S1_512(e) + CH(e,f,g) + K_512[t] + w[t];
         t2 = S0_512(a) + MAJ(a,b,c);
@@ -67,7 +67,7 @@ std::string hashComputation384(std::string pmess)
   }
 
   std::stringstream ss;
-  for(size_t i = 0; i < 6; ++i)
+  for(size_t i {}; i < 6; ++i)
     ss << std::setw(8) << std::setfill('0') << std::hex << H[i];
 
   return ss.str();
@@ -75,6 +75,6 @@ std::string hashComputation384(std::string pmess)
 
 std::string sha384(std::string mess)
 {
-  std::string pmess = preprocessing384(mess);
+  std::string pmess {preprocessing384(mess)};
   return hashComputation384(pmess);
 }

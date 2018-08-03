@@ -5,10 +5,10 @@ std::string preprocessing256(std::string mess)
   std::stringstream ss;
 
   // l + 1 + k ≡ 448 mod 512 (1 -> 1000 0000(bin) = 80(hex) -> 8 bit)
-  int32 l = 8 * mess.length();
-  int32 k = (448 - (8 + l)) % 512;
+  int32 l {(int32)(8 * mess.length())};
+  int32 k {(448 - (8 + l)) % 512};
 
-  for(size_t i = 0; i < mess.length(); ++i)
+  for(size_t i {}; i < mess.length(); ++i)
     ss << std::setw(2) << std::setfill('0') << std::hex << (int32)mess[i];
   ss << "80" << std::setw(16 + k / 4) << std::setfill('0') << std::hex << l;
 
@@ -18,11 +18,11 @@ std::string preprocessing256(std::string mess)
 std::string hashComputation256(std::string pmess)
 {
   int32 a,b,c,d,e,f,g,h,t1,t2;
-  int32 w[64],H[8] = {
+  int32 w[64],H[8] {
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
     0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19};
 
-  for(size_t i = 0, j = 0; i < pmess.length(); i += 8, ++j)
+  for(size_t i {}, j {}; i < pmess.length(); i += 8, ++j)
   {
     w[j] = std::stoll(pmess.substr(i,8), 0, 16);
 
@@ -41,7 +41,7 @@ std::string hashComputation256(std::string pmess)
       g = H[6];
       h = H[7];
 
-      for(size_t t = 0; t < 64; ++t)
+      for(size_t t {}; t < 64; ++t)
       {
         t1 = h + S1_256(e) + CH(e,f,g) + K_256[t] + w[t];
         t2 = S0_256(a) + MAJ(a,b,c);
@@ -67,7 +67,7 @@ std::string hashComputation256(std::string pmess)
   }
 
   std::stringstream ss;
-  for(size_t i = 0; i < 8; ++i)
+  for(size_t i {}; i < 8; ++i)
   ss << std::setw(8) << std::setfill('0') << std::hex << H[i];
 
   return ss.str();
@@ -75,6 +75,6 @@ std::string hashComputation256(std::string pmess)
 
 std::string sha256(std::string mess)
 {
-  std::string pmess = preprocessing256(mess);
+  std::string pmess {preprocessing256(mess)};
   return hashComputation256(pmess);
 }
