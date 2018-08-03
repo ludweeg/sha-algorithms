@@ -8,7 +8,7 @@ std::function<int32(int32,int32,int32)> getFunc(size_t t)
     return [](int32 x, int32 y, int32 z) -> int32 { return PARITY(x,y,z); };
   else if(t < 60)
     return [](int32 x, int32 y, int32 z) -> int32 { return MAJ(x,y,z); };
-  else
+  else /* t < 80 */
     return [](int32 x, int32 y, int32 z) -> int32 { return PARITY(x,y,z); };
 
 }
