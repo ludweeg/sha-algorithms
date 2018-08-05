@@ -5,7 +5,7 @@ std::string preprocessing384(std::string mess)
   std::stringstream ss;
 
   // l + 1 + k ≡ 896 mod 1024 (1 -> 1000 0000(bin) = 80(hex) -> 8 bit)
-  int64 l {(int32)(8 * mess.length())};
+  int64 l {8 * (int32)mess.length()};
   int64 k {(896 - (8 + l)) % 1024};
 
   for(size_t i {}; i < mess.length(); ++i)
