@@ -5,8 +5,6 @@
 #include <iomanip>
 #include <functional>
 
-typedef unsigned int int32;
-typedef unsigned long long int64;
 #define CH(x,y,z)     ((x & y) ^ (~x & z))
 #define MAJ(x,y,z)    ((x & y) ^ (x & z) ^ (y & z))
 #define PARITY(x,y,z) (x ^ y ^ z)
@@ -23,7 +21,7 @@ typedef unsigned long long int64;
 #define s1_256(x) (ROTR_32(x,17) ^ ROTR_32(x,19) ^ SHR(x,10))
 #define s1_512(x) (ROTR_64(x,19) ^ ROTR_64(x,61) ^ SHR(x, 6))
 
-const int32 K_256[64] {
+const uint32_t K_256[64] {
   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
   0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
   0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
@@ -41,7 +39,7 @@ const int32 K_256[64] {
   0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
   0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
 
-const int64 K_512[80] {
+const uint64_t K_512[80] {
   0x428a2f98d728ae22, 0x7137449123ef65cd, 0xb5c0fbcfec4d3b2f, 0xe9b5dba58189dbbc,
   0x3956c25bf348b538, 0x59f111f1b605d019, 0x923f82a4af194f9b, 0xab1c5ed5da6d8118,
   0xd807aa98a3030242, 0x12835b0145706fbe, 0x243185be4ee4b28c, 0x550c7dc3d5ffb4e2,
@@ -63,7 +61,7 @@ const int64 K_512[80] {
   0x28db77f523047d84, 0x32caab7b40c72493, 0x3c9ebe0a15c9bebc, 0x431d67c49c100d4c,
   0x4cc5d4becb3e42b6, 0x597f299cfc657e2a, 0x5fcb6fab3ad6faec, 0x6c44198c4a475817};
 
-const int32 K[80] {
+const uint32_t K[80] {
   0x5a827999, 0x5a827999, 0x5a827999, 0x5a827999,
   0x5a827999, 0x5a827999, 0x5a827999, 0x5a827999,
   0x5a827999, 0x5a827999, 0x5a827999, 0x5a827999,

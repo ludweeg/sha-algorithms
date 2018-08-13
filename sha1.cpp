@@ -1,15 +1,15 @@
 #include "sha.h"
 
-std::function<int32(int32,int32,int32)> getFunc(size_t t)
+std::function<uint32_t(uint32_t,uint32_t,uint32_t)> getFunc(size_t t)
 {
   if(t < 20)
-    return [](int32 x, int32 y, int32 z) -> int32 { return CH(x,y,z); };
+    return [](uint32_t x, uint32_t y, uint32_t z) -> uint32_t { return CH(x,y,z); };
   else if(t < 40)
-    return [](int32 x, int32 y, int32 z) -> int32 { return PARITY(x,y,z); };
+    return [](uint32_t x, uint32_t y, uint32_t z) -> uint32_t { return PARITY(x,y,z); };
   else if(t < 60)
-    return [](int32 x, int32 y, int32 z) -> int32 { return MAJ(x,y,z); };
+    return [](uint32_t x, uint32_t y, uint32_t z) -> uint32_t { return MAJ(x,y,z); };
   else /* t < 80 */
-    return [](int32 x, int32 y, int32 z) -> int32 { return PARITY(x,y,z); };
+    return [](uint32_t x, uint32_t y, uint32_t z) -> uint32_t { return PARITY(x,y,z); };
 
 }
 
@@ -18,11 +18,11 @@ std::string preprocessing1(std::string mess)
   std::stringstream ss;
 
   // l + 1 + k ≡ 448 mod 512 (1 -> 1000 0000(bin) = 80(hex) -> 8 bit)
-  int32 l {8 * (int32)mess.length()};
-  int32 k {(448 - (8 + l)) % 512};
+  uint32_t l {8 * (uint32_t)mess.length()};
+  uint32_t k {(448 - (8 + l)) % 512};
 
   for(size_t i {}; i < mess.length(); ++i)
-    ss << std::setw(2) << std::setfill('0') << std::hex << (int32)mess[i];
+    ss << std::setw(2) << std::setfill('0') << std::hex << (uint32_t)mess[i];
   ss << "80" << std::setw(16 + k / 4) << std::setfill('0') << std::hex << l;
 
   return ss.str();
@@ -30,8 +30,8 @@ std::string preprocessing1(std::string mess)
 
 std::string hashComputation1(std::string pmess)
 {
-  int32 a,b,c,d,e,t0;
-  int32 w[80],H[5] {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0};
+  uint32_t a,b,c,d,e,t0;
+  uint32_t w[80],H[5] {0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0};
 
   for(size_t i {}, j {}; i < pmess.length(); i += 8, ++j)
   {

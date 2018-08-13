@@ -5,11 +5,11 @@ std::string preprocessing384(std::string mess)
   std::stringstream ss;
 
   // l + 1 + k ≡ 896 mod 1024 (1 -> 1000 0000(bin) = 80(hex) -> 8 bit)
-  int64 l {8 * (int32)mess.length()};
-  int64 k {(896 - (8 + l)) % 1024};
+  uint64_t l {8 * (uint32_t)mess.length()};
+  uint64_t k {(896 - (8 + l)) % 1024};
 
   for(size_t i {}; i < mess.length(); ++i)
-    ss << std::setw(2) << std::setfill('0') << std::hex << (int64)mess[i];
+    ss << std::setw(2) << std::setfill('0') << std::hex << (uint64_t)mess[i];
   ss << "80" << std::setw(32 + k / 4) << std::setfill('0') << std::hex << l;
 
   return ss.str();
@@ -17,8 +17,8 @@ std::string preprocessing384(std::string mess)
 
 std::string hashComputation384(std::string pmess)
 {
-  int64 a,b,c,d,e,f,g,h,t1,t2;
-  int64 w[80],H[8] {
+  uint64_t a,b,c,d,e,f,g,h,t1,t2;
+  uint64_t w[80],H[8] {
     0xcbbb9d5dc1059ed8, 0x629a292a367cd507, 0x9159015a3070dd17, 0x152fecd8f70e5939,
     0x67332667ffc00b31, 0x8eb44a8768581511, 0xdb0c2e0d64f98fa7, 0x47b5481dbefa4fa4};
 
